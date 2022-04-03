@@ -1,30 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { baseUrl, apiKey } from '../../pages/api/config';
 import styled from 'styled-components';
 
-const StyledName = styled.div`
+const MovieContainer = styled.div`
   font-family: 'Roboto';
-  color: '#000';
   font-style: normal;
   font-weight: 400;
-  font-size: 64px;
-  line-height: 75px;
+  font-size: 58px;
+  line-height: 65px;
   text-align: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #000;
 `;
-export const MovieName = () => {
-  const [movieName, setMovieName] = useState(null);
-  useEffect(() => {
-    fetch(`${baseUrl}/films/468373`, {
-      method: 'GET',
-      headers: {
-        'X-API-KEY': apiKey,
-        'Content-Type': 'application/json'
-      }
-    })
-      .then((res) => res.json())
-      .then((json) => setMovieName(json.nameRu))
-      .catch((err) => console.log(err));
-  }, [movieName]);
 
-  return <StyledName>{movieName}</StyledName>;
+const ExtraInfo = styled.div`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 29px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  color: #000;
+`;
+
+export const MovieName = ({ movieName, year }) => {
+  return (
+    <>
+      <MovieContainer>{movieName}</MovieContainer>
+      <ExtraInfo>{year}</ExtraInfo>
+    </>
+  );
 };
